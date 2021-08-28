@@ -1,0 +1,53 @@
+
+spring:
+  application:
+    name: obsido-backend
+  datasource:
+    url: jdbc:mysql://localhost:60001/obsido?useLegacyDatetimeCode=false&serverTimezone=America/Sao_Paulo
+    password: obsido
+    username: obsido
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+  messages:
+    basename: locale/messages
+    encoding: windows-1252
+  security:
+    user:
+      name: obsido
+      password: obsido
+      roles: manager
+
+logging:
+  level:
+    br.com.driw.obsido.bridge: INFO
+    br.com.driw.obsido.modules: INFO
+    #br.com.driw.obsido.modules.alphavantage: DEBUG
+    br.com.driw.obsido.thirdparty: DEBUG
+
+feign:
+  client:
+    default-config: default
+    config:
+      default:
+        loggerLevel: full
+        decoder: br.com.driw.obsido.thirdparty.feign.FeignResponseDecoder
+        errorDecoder: br.com.driw.obsido.thirdparty.feign.FeignResponseErrorDecoder
+#      alphavantage:
+#        requestInterceptors:
+#          - br.com.driw.obsido.modules.alphavantage.AlphaVantageInterceptor
+
+thirdparty:
+#  alphavantage:
+#    token: demo
+  fundamentus:
+    resultURL: 'http://www.fundamentus.com.br/resultado.php'
+    paperURL: 'https://fundamentus.com.br/detalhes.php?papel=%s'
+
+#endpoints:
+#  alphavantage: https://www.alphavantage.co

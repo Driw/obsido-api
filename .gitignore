@@ -1,0 +1,6 @@
+# IntelliJ
+/.idea/
+/target
+
+# Aplicação
+src/main/resources/application-*.yml
